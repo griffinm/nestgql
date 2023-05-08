@@ -1,4 +1,5 @@
 import { Field, ObjectType, ID } from '@nestjs/graphql';
+import { Author } from './author.model';
 
 @ObjectType({ description: 'Post model' })
 export class Post {
@@ -13,4 +14,7 @@ export class Post {
 
   @Field(type => Date)
   createdAt: Date;
+
+  @Field()
+  authorId: string;
 }
