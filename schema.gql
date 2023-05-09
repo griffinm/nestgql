@@ -27,8 +27,11 @@ scalar DateTime
 type Query {
   authors(firstName: String, lastName: String): [Author!]!
   author(id: Float!): Author!
+  posts(title: String): [Post!]!
+  post(id: Float!): Post!
 }
 
 type Mutation {
   createAuthor(firstName: String!, lastName: String!): Author!
+  createPost(title: String!, content: String, authorId: Float!): Post!
 }

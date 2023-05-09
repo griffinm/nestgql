@@ -19,8 +19,9 @@ model Author {
 
 model Post {
   id        Int      @id @default(autoincrement())
-  title     String
-  content   String?
   author    Author?  @relation(fields: [authorId], references: [id])
   authorId  Int?
+  content   String?
+  createdAt DateTime @default(now())
+  title     String
 }
