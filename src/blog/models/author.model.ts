@@ -1,13 +1,14 @@
 import { Field, ObjectType, ID } from '@nestjs/graphql';
+import { Author as AuthorDB } from '@prisma/client';
 
 @ObjectType({ description: 'Author model' })
 export class Author {
   @Field(type => ID)
-  id: number;
+  id: AuthorDB['id'];
 
-  @Field()
-  firstName: string;
+  @Field(() => String)
+  firstName: AuthorDB['firstName']
 
-  @Field()
-  lastName: string;
+  @Field(() => String)
+  lastName: AuthorDB['lastName'];
 }

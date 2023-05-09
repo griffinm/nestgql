@@ -11,7 +11,7 @@ import { PrismaService } from './services/prisma.service';
     AuthorService,
     PostResolver,
     PostService,
-    PrismaService
+    PrismaService,
   ],
 })
 export class BlogModule {}

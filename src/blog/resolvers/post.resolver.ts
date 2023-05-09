@@ -10,20 +10,4 @@ export class PostResolver {
     private readonly postService: PostService,
     private readonly authorService: AuthorService,
   ) {}
-
-  @Query(returns => Post)
-  async post(@Args('id') id: number): Promise<Post> {
-    return this.postService.findOneById(id);
-  }
-
-  @Query(returns => [Post])
-  async posts(): Promise<Post[]> {
-    return this.postService.findAll({});
-  }
-
-  @ResolveField('author', returns => Author)
-  async getAuthor(@Parent() post: Post) {
-    const { authorId } = post;
-    return this.authorService.findOneById(authorId);
-  }
 }

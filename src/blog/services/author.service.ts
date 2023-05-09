@@ -5,35 +5,32 @@ import { Author, Prisma } from '@prisma/client';
 @Injectable()
 export class AuthorService {
   constructor(
-    private readonly prisma: PrismaService
+    private readonly prisma: PrismaService,
   ) {}
-
-  private readonly authors = [
-    {
-      id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
-    },
-    {
-      id: 2,
-      firstName: 'Jane',
-      lastName: 'Doe',
-    },
-  ];
-
-  findOneById(id: number) {
-    return this.authors.find((author) => author.id === id);
+  
+  async getAuthor(params: { where: Prisma.AuthorWhereUniqueInput }) : Promise<Author | null> {
+    const { where } = params;
+    return this.prisma.author.findUnique({ where });
   }
 
-  author(
-    authorWhereUniqueInput: Prisma.AuthorWhereUniqueInput,
-  ): Promise<Author | null> {
-    return this.prisma.author.findUnique({
-      where: authorWhereUniqueInput,
+  async getAuthors(params: { where?: Prisma.AuthorWhereInput }) : Promise<Author[]> {
+    const { where } = params;
+    return this.prisma.author.findMany({ where });
+  }
+
+  async createAuthor(
+    params: { 
+      firstName: Author['firstName'],
+      lastName: Author['lastName'],
+    }
+  ) : Promise<Author> {
+    const { firstName, lastName } = params;
+    const author = await this.prisma.author.create({
+      data: {
+        firstName,
+        lastName,
+      }
     });
-  }
-
-  findAll() {
-    return this.authors;
+    return author;
   }
 }
