@@ -4,7 +4,7 @@ import { Author } from './author.model';
 @ObjectType({ description: 'Post model' })
 export class Post {
   @Field(type => ID)
-  id: string;
+  id: number;
 
   @Field()
   title: string;
@@ -16,5 +16,5 @@ export class Post {
   createdAt: Date;
 
   @Field()
-  authorId: string;
+  authorId: number;
 }

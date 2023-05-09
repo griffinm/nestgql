@@ -12,13 +12,13 @@ export class PostResolver {
   ) {}
 
   @Query(returns => Post)
-  async post(@Args('id') id: string): Promise<Post> {
+  async post(@Args('id') id: number): Promise<Post> {
     return this.postService.findOneById(id);
   }
 
   @Query(returns => [Post])
   async posts(): Promise<Post[]> {
-    return this.postService.findAll();
+    return this.postService.findAll({});
   }
 
   @ResolveField('author', returns => Author)

@@ -3,6 +3,7 @@ import { AuthorResolver } from './resolvers/author.resolver';
 import { AuthorService } from './services/author.service';
 import { PostResolver } from './resolvers/post.resolver';
 import { PostService } from './services/post.service';
+import { PrismaService } from './services/prisma.service';
 
 @Module({
   providers: [
@@ -10,6 +11,7 @@ import { PostService } from './services/post.service';
     AuthorService,
     PostResolver,
     PostService,
-  ]
+    PrismaService
+  ],
 })
 export class BlogModule {}
