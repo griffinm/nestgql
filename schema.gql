@@ -2,6 +2,21 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""Post model"""
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+  authorId: Float!
+  author: Author!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 """Author model"""
 type Author {
   id: ID!
@@ -10,28 +25,65 @@ type Author {
   posts: [Post!]!
 }
 
-"""Post model"""
-type Post {
-  id: ID!
-  title: String!
-  content: String!
-  createdAt: DateTime!
-  authorId: Float!
+type Like {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type Query {
   authors(firstName: String, lastName: String): [Author!]!
   author(id: Float!): Author!
-  posts(title: String): [Post!]!
+  posts(title: String, authorId: Float): [Post!]!
   post(id: Float!): Post!
+  like(id: Int!): Like!
 }
 
 type Mutation {
-  createAuthor(firstName: String!, lastName: String!): Author!
-  createPost(title: String!, content: String, authorId: Float!): Post!
+  createAuthor(createAuthorInput: CreateAuthorInput!): Author!
+  updateAuthor(updateAuthorInput: UpdateAuthorInput!): Author!
+  createPost(createPostInput: CreatePostInput!): Post!
+  createLike(createLikeInput: CreateLikeInput!): Like!
+  updateLike(updateLikeInput: UpdateLikeInput!): Like!
+  removeLike(id: Int!): Like!
+}
+
+input CreateAuthorInput {
+  """The author's first name"""
+  firstName: String!
+
+  """The author's last name"""
+  lastName: String!
+}
+
+input UpdateAuthorInput {
+  """The author's id"""
+  id: Float!
+
+  """The author's first name"""
+  firstName: String!
+
+  """The author's last name"""
+  lastName: String!
+}
+
+input CreatePostInput {
+  """The post's title"""
+  title: String!
+
+  """The post's content"""
+  content: String!
+
+  """The post's author id"""
+  authorId: Float!
+}
+
+input CreateLikeInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateLikeInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

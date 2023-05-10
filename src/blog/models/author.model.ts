@@ -1,5 +1,6 @@
 import { Field, ObjectType, ID } from '@nestjs/graphql';
 import { Author as AuthorDB } from '@prisma/client';
+import { Contains } from 'class-validator';
 
 @ObjectType({ description: 'Author model' })
 export class Author {
@@ -10,5 +11,5 @@ export class Author {
   firstName: AuthorDB['firstName']
 
   @Field(() => String)
-  lastName: AuthorDB['lastName'];
+  lastName?: AuthorDB['lastName'];
 }
